@@ -1,0 +1,9 @@
+==Tuxis Input Module.
+Simple input module based on DirectInput.
+
+== Requirements
+* DirectX Redistributable
+* C++0X Compiler
+
+== Authors
+Andrew Tulay (Tulyakov) - main developer. (mhyhre@gmail.com)
