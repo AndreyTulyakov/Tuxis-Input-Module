@@ -7,10 +7,10 @@
 * ===============================================================================
 */
 
-#include <windows.h>
 #include <iostream>
-#include "InputInclude/Input.h"
 using namespace std;
+
+#include "InputInclude/Input.h"
 using namespace Tuxis;
 
 int main()
