@@ -3,7 +3,7 @@
 * Tuxis Project
 * Copyright (C) 2011-2012, Andrew Tulay
 * ===============================================================================
-* Input Module simple sample
+* Input Module simple example
 * ===============================================================================
 */
 
@@ -13,26 +13,10 @@
 using namespace std;
 using namespace Tuxis;
 
-// Find Console HWND
-BOOL CALLBACK EnumWndProc(HWND hwnd, LPARAM lParam)
+
+int main()
 {
-   if(GetWindowThreadProcessId(hwnd, NULL) == GetCurrentThreadId())
-   {
-      *(HWND*)lParam = hwnd;
-      return FALSE;
-   }
-
-   return TRUE;
-}
-
-int main(int argc, wchar_t* argv[])
-{
-	HWND hWnd;
-	EnumWindows(EnumWndProc, (LPARAM)&hWnd);
-
-	Input *mInput = new Input(hWnd);
-
-	
+	Input mInput(0);
 
 	cout 
 		<< "Input Sample.\n"
@@ -40,26 +24,25 @@ int main(int argc, wchar_t* argv[])
 		<< "2) Press Left Control key to change cursor position.\n"
 		<< "3) Press Escape key to exit\n";
 
-	while( !mInput->KeyDown(Key::ESCAPE) )
+
+	while( !mInput.KeyDown(Key::ESCAPE) )
 	{
-		if(mInput->KeyHit(Key::SPACE))
+		if(mInput.KeyHit(Key::SPACE))
 			cout << "Space hit!" << endl;
 
-		if(mInput->KeyUp(Key::SPACE))
+		if(mInput.KeyUp(Key::SPACE))
 			cout << "Space up!" << endl;
 
-		if(mInput->KeyDown(Key::SPACE))
-			if(mInput->MouseSpeedX() || mInput->MouseSpeedY()) 
-				cout << "Mouse speed: ( " << mInput->MouseSpeedX() << " , " << mInput->MouseSpeedY()<< " )" << endl;
+		if(mInput.KeyDown(Key::SPACE))
+			if(mInput.MouseSpeedX() || mInput.MouseSpeedY()) 
+				cout << "Mouse speed: ( " << mInput.MouseSpeedX() << " , " << mInput.MouseSpeedY()<< " )" << endl;
 
-		if(mInput->KeyHit(Key::LCONTROL))
-			mInput->SetMousePosition(0,0);
+		if(mInput.KeyHit(Key::LCONTROL))
+			mInput.SetMousePosition(0,0);
 
 		Sleep(50);
-		mInput->Update();
+		mInput.Update();
 	}
-
-	delete mInput;
 
 	return 0;
 }

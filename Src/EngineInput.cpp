@@ -3,6 +3,8 @@
 
 namespace Tuxis
 {
+	void Error(const char* msg) { MessageBoxA(0,msg,"Error",0); }
+
 	EngineInput* EngineInput::mInstance = nullptr;
 
 	EngineInput::EngineInput(HWND pHWND)
@@ -38,30 +40,30 @@ namespace Tuxis
 		}
 
 		if( FAILED( DirectInput8Create( GetModuleHandle( NULL ), DIRECTINPUT_VERSION, IID_IDirectInput8, ( void ** )&lpDI, NULL ) ) )
-			throw "Input: DirectInput8Create";
+			Error("Input: DirectInput8Create");
 
 		// Keyboard
 
 		if( FAILED( lpDI->CreateDevice( GUID_SysKeyboard, &KeyboardDevice, NULL ) ) )
-			throw "Input: Can't create Keyboard device";
+			Error("Input: Can't create Keyboard device");
 
 		if( FAILED( KeyboardDevice->SetDataFormat( &c_dfDIKeyboard ) ) )
-			throw "Input: Can't Set Data Format for Keyboard device";
+			Error("Input: Can't Set Data Format for Keyboard device");
 
 		if( FAILED( KeyboardDevice->SetCooperativeLevel( hWindow, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE ) ) )
-			throw "Input: Can't Set Cooperative Level for Keyboard";
+			Error("Input: Can't Set Cooperative Level for Keyboard");
 
 
 		// Mouse
 
 		if( FAILED( lpDI->CreateDevice( GUID_SysMouse, &MouseDevice, NULL ) ) )
-			throw "Input: Can't create Mouse device";
+			Error("Input: Can't create Mouse device");
 
 		if( FAILED( MouseDevice->SetDataFormat( &c_dfDIMouse2 ) ) )
-			throw "Input: Can't Set Data Format for Mouse device";
+			Error("Input: Can't Set Data Format for Mouse device");
 
 		if( FAILED( MouseDevice->SetCooperativeLevel( hWindow, DISCL_NONEXCLUSIVE | DISCL_BACKGROUND ) ) )
-			throw "Input: Can't Set Cooperative Level for mouse";
+			Error("Input: Can't Set Cooperative Level for mouse");
 
 	}
 
