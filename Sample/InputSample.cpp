@@ -13,7 +13,6 @@
 using namespace std;
 using namespace Tuxis;
 
-
 int main()
 {
 	Input mInput(0);

@@ -51,7 +51,7 @@ namespace Tuxis
 			Error("Input: Can't Set Data Format for Keyboard device");
 
 		if( FAILED( KeyboardDevice->SetCooperativeLevel( hWindow, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE ) ) )
-			Error("Input: Can't Set Cooperative Level for Keyboard");
+			;//Error("Input: Can't Set Cooperative Level for Keyboard");
 
 
 		// Mouse
