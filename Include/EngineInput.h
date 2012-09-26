@@ -61,8 +61,6 @@ namespace Tuxis
 		bool MouseHits[8];
 		bool MouseUps[8];
 
-
-
 		static EngineInput* mInstance;
 	};
 
