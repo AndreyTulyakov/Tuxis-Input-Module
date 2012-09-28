@@ -1,11 +1,11 @@
-/*
-* ===============================================================================
-* Tuxis Project
-* Copyright (C) 2011-2012, Andrew Tulay
-* ===============================================================================
-* EngineInput Module
-* Required: dinput.h , dinput8.lib, dxguid.lib
-* ===============================================================================
+/**
+===============================================================================
+Tuxis Project
+Copyright (C) 2011-2012, Andrew Tulay
+===============================================================================
+EngineInput Module
+Required: dinput.h , dinput8.lib, dxguid.lib
+===============================================================================
 */
 
 #pragma once
@@ -14,6 +14,7 @@
 #define DIRECTINPUT_VERSION 0x0800
 
 #include <dinput.h>
+
 
 namespace Tuxis
 {
@@ -28,16 +29,16 @@ namespace Tuxis
 
 		void Update();
 
-		bool KeyDown( BYTE in_kb );		
-		bool KeyHit( BYTE in_kb );	
-		bool KeyUp( BYTE in_kb );	
+		bool KeyDown( BYTE key );		
+		bool KeyHit( BYTE key );	
+		bool KeyUp( BYTE key );	
 
-		bool MouseDown( BYTE in_mb ); 
-		bool MouseHit( BYTE in_mb );	
-		bool MouseUp( BYTE in_mb );
+		bool MouseDown( BYTE mouse_key ); 
+		bool MouseHit( BYTE mouse_key );	
+		bool MouseUp( BYTE mouse_key );
 
-		void	SetMousePosition(int x, int y);
-		void	GetMousePosition(int& x, int& y);
+		void SetMousePosition(int x, int y);
+		void GetMousePosition(int& x, int& y);
 
 		int MouseSpeedX();
 		int MouseSpeedY();
