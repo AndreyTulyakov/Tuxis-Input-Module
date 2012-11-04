@@ -1,0 +1,12 @@
+==InputModule Sample
+
+=== Manual.
+A few steps:
+1) Include: InputModule.h
+2) Link: InputModule.lib
+3) Put: InputModule.dll
+4) Try compile;
+5) Profit!
+
+=== Authors
+Andrew Tulay (Tulyakov) - main developer. (mhyhre@gmail.com)
