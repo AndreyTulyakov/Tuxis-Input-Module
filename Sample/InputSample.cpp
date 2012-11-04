@@ -10,7 +10,7 @@
 #include <iostream>
 using namespace std;
 
-#include "InputInclude/Input.h"
+#include "InputModule.h"
 using namespace Tuxis;
 
 int main()
