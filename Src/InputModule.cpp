@@ -1,5 +1,5 @@
 
-#include "Input.h"
+#include "InputModule.h"
 #include "EngineInput.h"
 
 namespace Tuxis
