@@ -50,13 +50,13 @@ namespace Tuxis
 		if( FAILED( KeyboardDevice->SetDataFormat( &c_dfDIKeyboard ) ) )
 			Error("Input: Can't Set Data Format for Keyboard device");
 
-		if( FAILED( KeyboardDevice->SetCooperativeLevel( hWindow, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE ) ) )
-			;//Error("Input: Can't Set Cooperative Level for Keyboard");
+		//if( FAILED( KeyboardDevice->SetCooperativeLevel( hWindow, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE ) ) )
+			//Error("Input: Can't Set Cooperative Level for Keyboard");
 
 
 		// Mouse
 
-		if( FAILED( lpDI->CreateDevice( GUID_SysMouse, &MouseDevice, NULL ) ) )
+		if( FAILED(lpDI->CreateDevice(GUID_SysMouse, &MouseDevice, NULL)) )
 			Error("Input: Can't create Mouse device");
 
 		if( FAILED( MouseDevice->SetDataFormat( &c_dfDIMouse2 ) ) )
