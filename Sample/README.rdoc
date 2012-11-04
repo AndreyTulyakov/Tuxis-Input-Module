@@ -1,6 +1,6 @@
 ==InputModule Sample
 
-=== Manual.
+=== Manual
 A few steps:
 1) Include: InputModule.h
 2) Link: InputModule.lib
