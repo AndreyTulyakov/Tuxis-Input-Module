@@ -8,10 +8,13 @@ Input Module based on DirectInput
 */
 
 #pragma once
-
-
-#include "_DllExport.h"
 #include <windows.h>
+
+#ifdef _EXPORT
+#define DLL_EXPORT __declspec(dllexport)
+#else
+#define DLL_EXPORT __declspec(dllimport)
+#endif
 
 namespace Tuxis
 {

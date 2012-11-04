@@ -9,12 +9,11 @@ Required: dinput.h , dinput8.lib, dxguid.lib
 */
 
 #pragma once
-#include "_DllExport.h"
 
 #define DIRECTINPUT_VERSION 0x0800
 
 #include <dinput.h>
-
+#include "InputModule.h"
 
 namespace Tuxis
 {
