@@ -10,12 +10,14 @@
 #include <iostream>
 using namespace std;
 
-#include "../Include/InputModule.h"
+#include "InputModule.h"
 using namespace Tuxis;
 
 int main()
 {
-	Input mInput(0);
+	InputManager mInput(0);
+	IKeyboard keyboard = mInput.GetKeyboard();
+	IMouse mouse= mInput.GetMouse();
 
 	cout 
 		<< "Input Sample.\n"
@@ -24,23 +26,25 @@ int main()
 		<< "3) Press Escape key to exit\n";
 
 
-	while( !mInput.KeyDown(Key::ESCAPE) )
+	while( !keyboard.ButtonDown(Key::ESCAPE) )
 	{
-		if(mInput.KeyHit(Key::SPACE))
+		if(keyboard.ButtonHit(Key::SPACE))
 			cout << "Space hit!" << endl;
 
-		if(mInput.KeyUp(Key::SPACE))
+		if(keyboard.ButtonUp(Key::SPACE))
 			cout << "Space up!" << endl;
 
-		if(mInput.KeyDown(Key::SPACE))
-			if(mInput.MouseSpeedX() || mInput.MouseSpeedY()) 
-				cout << "Mouse speed: ( " << mInput.MouseSpeedX() << " , " << mInput.MouseSpeedY()<< " )" << endl;
+		if(keyboard.ButtonDown(Key::SPACE))
+			if(mouse.SpeedX() || mouse.SpeedY()) 
+				cout << "Mouse speed: ( " << mouse.SpeedX() << " , " << mouse.SpeedY()<< " )" << endl;
 
-		if(mInput.KeyHit(Key::LCONTROL))
-			mInput.SetMousePosition(0,0);
+		if(keyboard.ButtonHit(Key::LCONTROL))
+			mouse.SetCursorPosition(0,0);
 
 		Sleep(50);
-		mInput.Update();
+
+		keyboard.Update();
+		mouse.Update();
 	}
 
 	return 0;

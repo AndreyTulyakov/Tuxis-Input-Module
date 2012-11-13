@@ -19,6 +19,7 @@ Input Module based on DirectInput
 namespace Tuxis
 {
 	typedef unsigned char BYTE;
+
 	class IMouse;
 	class IKeyboard;
 
@@ -39,9 +40,12 @@ namespace Tuxis
 	class DLL_EXPORT IMouse
 	{
 	private:
+		friend class InputManager;
 		IMouse();
 
 	public:
+
+
 		bool ButtonDown( BYTE mouse_key ); 
 		bool ButtonHit( BYTE mouse_key );	
 		bool ButtonUp( BYTE mouse_key );
@@ -61,9 +65,11 @@ namespace Tuxis
 	class DLL_EXPORT IKeyboard
 	{
 	private:
+		friend class InputManager;
 		IKeyboard();
 
 	public:
+
 		bool ButtonDown( BYTE mouse_key ); 
 		bool ButtonHit( BYTE mouse_key );	
 		bool ButtonUp( BYTE mouse_key );

@@ -29,7 +29,20 @@ namespace Tuxis
 		EngineInput::GetInstance()->UpdateAllStates();
 	}
 
+	IMouse InputManager::GetMouse()
+	{
+		//IMouse a;
+		return IMouse();//a;
+	}
 
+	IKeyboard InputManager::GetKeyboard()
+	{
+		//IKeyboard a;
+		return IKeyboard();//a;
+	}
+
+	// Keyboard
+	IKeyboard::IKeyboard(){}
 
 	bool IKeyboard::ButtonDown( BYTE in_kb )
 	{
@@ -53,6 +66,7 @@ namespace Tuxis
 
 
 	// IMouse Methods
+	IMouse::IMouse(){}
 
 	bool IMouse::ButtonDown( BYTE in_mb )
 	{
