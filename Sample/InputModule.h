@@ -79,7 +79,7 @@ namespace Tuxis
 
 
 
-	namespace Key
+	namespace Keycodes
 	{
 		// On main keyboard
 

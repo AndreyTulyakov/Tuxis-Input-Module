@@ -22,7 +22,7 @@ int main()
 	IKeyboard keyboard = mInput.GetKeyboard();
 
 	// Get mouse interface from manager;
-	IMouse mouse= mInput.GetMouse();
+	IMouse mouse = mInput.GetMouse();
 
 	cout 
 		<< "Input Sample.\n"
@@ -30,20 +30,20 @@ int main()
 		<< "2) Press Left Control key to change cursor position.\n"
 		<< "3) Press Escape key to exit\n";
 
-	// while ESCAPE key on keyboard was not pushed, do this...
-	while( !keyboard.ButtonDown(Key::ESCAPE) )
+	// while ESCAPE key on keyboard was not pushed down, do this...
+	while( !keyboard.ButtonDown(Keycodes::ESCAPE) )
 	{
-		if(keyboard.ButtonHit(Key::SPACE))
+		if(keyboard.ButtonHit(Keycodes::SPACE))
 			cout << "Space hit!" << endl;
 
-		if(keyboard.ButtonUp(Key::SPACE))
+		if(keyboard.ButtonUp(Keycodes::SPACE))
 			cout << "Space up!" << endl;
 
-		if(keyboard.ButtonDown(Key::SPACE))
+		if(keyboard.ButtonDown(Keycodes::SPACE))
 			if(mouse.SpeedX() || mouse.SpeedY()) 
 				cout << "Mouse speed: ( " << mouse.SpeedX() << " , " << mouse.SpeedY()<< " )" << endl;
 
-		if(keyboard.ButtonHit(Key::LCONTROL))
+		if(keyboard.ButtonHit(Keycodes::LCONTROL))
 			mouse.SetCursorPosition(0,0);
 
 		Sleep(50);

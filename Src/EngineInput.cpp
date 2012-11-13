@@ -124,7 +124,9 @@ namespace Tuxis
 
 	bool EngineInput::MouseDown( BYTE in_mb )
 	{
-		if( MouseState.rgbButtons[in_mb] & 0x80 )
+		if(int(in_mb)>7 && int(in_mb)<0) return false;
+
+		if( MouseState.rgbButtons[in_mb])
 		{
 			return true;
 		}
@@ -137,6 +139,8 @@ namespace Tuxis
 
 	bool EngineInput::MouseHit( BYTE in_mb )
 	{
+		if(int(in_mb)>7 && int(in_mb)<0) return false;
+
 		if( MouseState.rgbButtons[in_mb] & 0x80 )
 		{
 			if( MouseHits[in_mb] )
@@ -156,6 +160,8 @@ namespace Tuxis
 
 	bool EngineInput::MouseUp( BYTE in_mb )
 	{
+		if(int(in_mb)>7 && int(in_mb)<0) return false;
+
 		if( MouseState.rgbButtons[in_mb] & 0x80 )
 		{
 			MouseUps[in_mb] = true;
@@ -179,6 +185,8 @@ namespace Tuxis
 
 	bool EngineInput::KeyDown( BYTE in_kb )
 	{
+		if(int(in_kb)>255 && int(in_kb)<0) return false;
+
 		if( Buttons[in_kb] & 0x80 )
 		{
 			return true;
@@ -192,6 +200,8 @@ namespace Tuxis
 
 	bool EngineInput::KeyHit( BYTE in_kb )
 	{
+		if(int(in_kb)>255 && int(in_kb)<0) return false;
+
 		if( Buttons[in_kb] & 0x80 )
 		{
 			if( KeyHits[in_kb] )
@@ -210,6 +220,8 @@ namespace Tuxis
 
 	bool EngineInput::KeyUp( BYTE in_kb )
 	{
+		if(int(in_kb)>255 && int(in_kb)<0) return false;
+
 		if( Buttons[in_kb] & 0x80 )
 		{
 			KeyUps[in_kb] = true;
