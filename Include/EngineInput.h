@@ -26,12 +26,15 @@ namespace Tuxis
 		EngineInput(HWND);
 		~EngineInput();
 
-		void Update();
+		void UpdateAllStates();
 
-		bool KeyDown( BYTE key );		
-		bool KeyHit( BYTE key );	
-		bool KeyUp( BYTE key );	
+		// Keyboard
+		bool KeyDown( BYTE key );
+		bool KeyHit( BYTE key );
+		bool KeyUp( BYTE key );
+		void UpdateKeyboardState();
 
+		// Mouse
 		bool MouseDown( BYTE mouse_key ); 
 		bool MouseHit( BYTE mouse_key );	
 		bool MouseUp( BYTE mouse_key );
@@ -43,23 +46,27 @@ namespace Tuxis
 		int MouseSpeedY();
 		int MouseSpeedZ();
 
+		void UpdateMouseState();
+
 	private:
+
+		// Keyboard
+		LPDIRECTINPUTDEVICE8 KeyboardDevice;
+		BYTE Buttons[256];
+		bool KeyHits[256];
+		bool KeyUps[256];
+
+		// Mouse
+		LPDIRECTINPUTDEVICE8 MouseDevice;
+		DIMOUSESTATE2 MouseState;
+		bool MouseHits[8];
+		bool MouseUps[8];
 
 		void Initialize(HWND theHWND);
 		void Release();
 
 		HWND hWindow;
 		LPDIRECTINPUT8 lpDI;					
-		LPDIRECTINPUTDEVICE8 KeyboardDevice,MouseDevice;		
-		DIMOUSESTATE2 MouseState;
-
-		BYTE Buttons[256];
-
-		bool KeyHits[256];
-		bool KeyUps[256];
-
-		bool MouseHits[8];
-		bool MouseUps[8];
 
 		static EngineInput* mInstance;
 	};

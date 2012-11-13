@@ -4,7 +4,7 @@
 * Include: InputModule.h
 * Link: InputModule.lib
 * Put: InputModule.dll
-* Try compile;
+* Try: compile
 * Profit!
 
 === Authors

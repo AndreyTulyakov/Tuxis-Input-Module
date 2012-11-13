@@ -25,24 +25,16 @@ namespace Tuxis
 
 		MSG msg = {0};
 
+		if( FAILED( DirectInput8Create( GetModuleHandle( NULL ), DIRECTINPUT_VERSION, IID_IDirectInput8, ( void ** )&lpDI, NULL ) ) )
+			Error("Input: DirectInput8Create");
+
+		// Keyboard
 		ZeroMemory( &Buttons, sizeof( BYTE ) * 256 );
 		for( unsigned short i = 0; i < 256; i++ )
 		{
 			KeyHits[i] = true;
 			KeyUps[i] = false;
 		}
-
-		ZeroMemory( &MouseState, sizeof( DIMOUSESTATE2 ) );
-		for( int i = 0; i < 8; i++ )
-		{
-			MouseHits[i] = true;
-			MouseUps[i] = false;
-		}
-
-		if( FAILED( DirectInput8Create( GetModuleHandle( NULL ), DIRECTINPUT_VERSION, IID_IDirectInput8, ( void ** )&lpDI, NULL ) ) )
-			Error("Input: DirectInput8Create");
-
-		// Keyboard
 
 		if( FAILED( lpDI->CreateDevice( GUID_SysKeyboard, &KeyboardDevice, NULL ) ) )
 			Error("Input: Can't create Keyboard device");
@@ -51,10 +43,17 @@ namespace Tuxis
 			Error("Input: Can't Set Data Format for Keyboard device");
 
 		//if( FAILED( KeyboardDevice->SetCooperativeLevel( hWindow, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE ) ) )
-			//Error("Input: Can't Set Cooperative Level for Keyboard");
+		//Error("Input: Can't Set Cooperative Level for Keyboard");
 
 
 		// Mouse
+
+		ZeroMemory( &MouseState, sizeof( DIMOUSESTATE2 ) );
+		for( int i = 0; i < 8; i++ )
+		{
+			MouseHits[i] = true;
+			MouseUps[i] = false;
+		}
 
 		if( FAILED(lpDI->CreateDevice(GUID_SysMouse, &MouseDevice, NULL)) )
 			Error("Input: Can't create Mouse device");
@@ -64,8 +63,8 @@ namespace Tuxis
 
 		if( FAILED( MouseDevice->SetCooperativeLevel( hWindow, DISCL_NONEXCLUSIVE | DISCL_BACKGROUND ) ) )
 			Error("Input: Can't Set Cooperative Level for mouse");
-
 	}
+	
 
 
 	EngineInput* EngineInput::GetInstance()
@@ -74,8 +73,7 @@ namespace Tuxis
 	}
 
 
-
-	void EngineInput::Update()
+	void EngineInput::UpdateAllStates()
 	{
 		MSG msg;
 		if( PeekMessage( &msg, NULL, 0, 0, PM_REMOVE ) )
@@ -83,28 +81,9 @@ namespace Tuxis
 			TranslateMessage( &msg );
 			DispatchMessage( &msg );
 		}
-		HRESULT hr;
 
-		hr = KeyboardDevice->GetDeviceState( sizeof( BYTE ) * 256, &Buttons ); // Данные с клавиатуры
-		if( FAILED( hr ) )
-		{
-			do
-			{
-				hr = KeyboardDevice->Acquire();
-			}
-			while( hr == DIERR_INPUTLOST || hr == DIERR_NOTACQUIRED );
-		}
-
-		hr = MouseDevice->GetDeviceState( sizeof( DIMOUSESTATE2 ), &MouseState ); // Данные с мышки
-		if( FAILED( hr ) )
-		{
-			do
-			{
-				hr = MouseDevice->Acquire();
-			}
-			while( hr == DIERR_INPUTLOST || hr == DIERR_NOTACQUIRED );
-		}
-
+		UpdateKeyboardState();
+		UpdateMouseState();
 	}
 
 
@@ -195,6 +174,7 @@ namespace Tuxis
 
 
 
+
 	// KEYBOARD BLOCK
 
 	bool EngineInput::KeyDown( BYTE in_kb )
@@ -270,4 +250,32 @@ namespace Tuxis
 			lpDI->Release();
 	}
 
+	void EngineInput::UpdateKeyboardState()
+	{
+		HRESULT hr = KeyboardDevice->GetDeviceState( sizeof( BYTE ) * 256, &Buttons );
+		if( FAILED( hr ) )
+		{
+			do
+			{
+				hr = KeyboardDevice->Acquire();
+			}
+			while( hr == DIERR_INPUTLOST || hr == DIERR_NOTACQUIRED );
+		}
+	}
+
+	void EngineInput::UpdateMouseState()
+	{
+		HRESULT hr = MouseDevice->GetDeviceState( sizeof( DIMOUSESTATE2 ), &MouseState );
+		if( FAILED( hr ) )
+		{
+			do
+			{
+				hr = MouseDevice->Acquire();
+			}
+			while( hr == DIERR_INPUTLOST || hr == DIERR_NOTACQUIRED );
+		}
+	}
+
 }
+
+

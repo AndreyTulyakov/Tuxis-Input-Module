@@ -4,7 +4,7 @@
 
 namespace Tuxis
 {
-	Input::Input(HWND pHWND)
+	InputManager::InputManager(HWND pHWND)
 	{
 		if(EngineInput::GetInstance()==nullptr)
 		{
@@ -16,7 +16,7 @@ namespace Tuxis
 		}
 	}
 
-	Input::~Input()
+	InputManager::~InputManager()
 	{
 		if(EngineInput::GetInstance()!=nullptr)
 		{
@@ -24,65 +24,78 @@ namespace Tuxis
 		}
 	}
 
-
-	void Input::SetMousePosition( int x, int y)
+	void InputManager::UpdateAllStates()
 	{
-		EngineInput::GetInstance()->SetMousePosition(x,y);
+		EngineInput::GetInstance()->UpdateAllStates();
 	}
 
-	void Input::GetMousePosition(int& x, int& y)
-	{
-		EngineInput::GetInstance()->GetMousePosition(x,y);
-	}
 
-	void Input::Update()
-	{
-		EngineInput::GetInstance()->Update();
-	}
 
-	int Input::MouseSpeedX()
-	{
-		return EngineInput::GetInstance()->MouseSpeedX();
-	}
-
-	int Input::MouseSpeedY()
-	{
-		return EngineInput::GetInstance()->MouseSpeedY();
-	}
-
-	int Input::MouseSpeedZ()
-	{
-		return EngineInput::GetInstance()->MouseSpeedZ();
-	}
-
-	bool Input::KeyDown( BYTE in_kb )
+	bool IKeyboard::ButtonDown( BYTE in_kb )
 	{
 		return EngineInput::GetInstance()->KeyDown(in_kb);
 	}
 
-	bool Input::KeyHit( BYTE in_kb )
+	bool IKeyboard::ButtonHit( BYTE in_kb )
 	{
 		return EngineInput::GetInstance()->KeyHit(in_kb);
 	}
 
-	bool Input::KeyUp( BYTE in_kb )
+	bool IKeyboard::ButtonUp( BYTE in_kb )
 	{
 		return EngineInput::GetInstance()->KeyUp(in_kb);
 	}
 
-	bool Input::MouseDown( BYTE in_mb )
+	void IKeyboard::Update()
+	{
+		EngineInput::GetInstance()->UpdateKeyboardState();
+	}
+
+
+	// IMouse Methods
+
+	bool IMouse::ButtonDown( BYTE in_mb )
 	{
 		return EngineInput::GetInstance()->MouseDown(in_mb);
 	}
 
-	bool Input::MouseHit( BYTE in_mb )
+	bool IMouse::ButtonHit( BYTE in_mb )
 	{
 		return EngineInput::GetInstance()->MouseHit(in_mb);
 	}
 
-	bool Input::MouseUp( BYTE in_mb )
+	bool IMouse::ButtonUp( BYTE in_mb )
 	{
 		return EngineInput::GetInstance()->MouseUp(in_mb);
 	}
 
+	void IMouse::SetCursorPosition( int x, int y)
+	{
+		EngineInput::GetInstance()->SetMousePosition(x,y);
+	}
+
+	void IMouse::GetCursorPosition(int& x, int& y)
+	{
+		EngineInput::GetInstance()->GetMousePosition(x,y);
+	}
+
+	void IMouse::Update()
+	{
+		EngineInput::GetInstance()->UpdateMouseState();
+	}
+
+	int IMouse::SpeedX()
+	{
+		return EngineInput::GetInstance()->MouseSpeedX();
+	}
+
+	int IMouse::SpeedY()
+	{
+		return EngineInput::GetInstance()->MouseSpeedY();
+	}
+
+	int IMouse::SpeedZ()
+	{
+		return EngineInput::GetInstance()->MouseSpeedZ();
+	}
 }

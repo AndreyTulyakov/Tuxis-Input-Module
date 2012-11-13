@@ -19,31 +19,56 @@ Input Module based on DirectInput
 namespace Tuxis
 {
 	typedef unsigned char BYTE;
+	class IMouse;
+	class IKeyboard;
 
-
-	class DLL_EXPORT Input
+	class DLL_EXPORT InputManager
 	{
 	public:
-		Input(HWND pHWND);
-		~Input();
+		InputManager(HWND pHWND);
+		~InputManager();
+
+		IMouse GetMouse();
+		IKeyboard GetKeyboard();
+
+		void UpdateAllStates();
+	};
+
+
+
+	class DLL_EXPORT IMouse
+	{
+	private:
+		IMouse();
+
+	public:
+		bool ButtonDown( BYTE mouse_key ); 
+		bool ButtonHit( BYTE mouse_key );	
+		bool ButtonUp( BYTE mouse_key );
+
+		void SetCursorPosition(int x, int y);
+		void GetCursorPosition(int& x, int& y);
+
+		int SpeedX();
+		int SpeedY();
+		int SpeedZ();
 
 		void Update();
+	};
 
-		bool KeyDown(BYTE key);		
-		bool KeyHit(BYTE key);	
-		bool KeyUp(BYTE key);	
 
-		bool MouseDown(BYTE mouse_key); 
-		bool MouseHit(BYTE mouse_key);	
-		bool MouseUp(BYTE mouse_key);
 
-		void SetMousePosition(int x, int y);
-		void GetMousePosition(int& x, int& y);
+	class DLL_EXPORT IKeyboard
+	{
+	private:
+		IKeyboard();
 
-		int MouseSpeedX();
-		int MouseSpeedY();
-		int MouseSpeedZ();
+	public:
+		bool ButtonDown( BYTE mouse_key ); 
+		bool ButtonHit( BYTE mouse_key );	
+		bool ButtonUp( BYTE mouse_key );
 
+		void Update();
 	};
 
 
