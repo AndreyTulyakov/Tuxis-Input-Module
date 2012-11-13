@@ -10,7 +10,7 @@ Input Module based on DirectInput
 #pragma once
 #include <windows.h>
 
-#ifdef _EXPORT
+#ifdef TUXIS_DLL_EXPORT_MODE
 #define DLL_EXPORT __declspec(dllexport)
 #else
 #define DLL_EXPORT __declspec(dllimport)
