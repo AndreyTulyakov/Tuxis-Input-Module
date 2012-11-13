@@ -31,14 +31,12 @@ namespace Tuxis
 
 	IMouse InputManager::GetMouse()
 	{
-		//IMouse a;
-		return IMouse();//a;
+		return IMouse();
 	}
 
 	IKeyboard InputManager::GetKeyboard()
 	{
-		//IKeyboard a;
-		return IKeyboard();//a;
+		return IKeyboard();
 	}
 
 	// Keyboard

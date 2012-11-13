@@ -15,8 +15,13 @@ using namespace Tuxis;
 
 int main()
 {
+	// Initialize input manager by window handler (or null)
 	InputManager mInput(0);
+
+	// Get keyboard interface from manager;
 	IKeyboard keyboard = mInput.GetKeyboard();
+
+	// Get mouse interface from manager;
 	IMouse mouse= mInput.GetMouse();
 
 	cout 
@@ -25,7 +30,7 @@ int main()
 		<< "2) Press Left Control key to change cursor position.\n"
 		<< "3) Press Escape key to exit\n";
 
-
+	// while ESCAPE key on keyboard was not pushed, do this...
 	while( !keyboard.ButtonDown(Key::ESCAPE) )
 	{
 		if(keyboard.ButtonHit(Key::SPACE))
@@ -43,6 +48,7 @@ int main()
 
 		Sleep(50);
 
+		// Update keyboard and mouse states
 		keyboard.Update();
 		mouse.Update();
 	}
